@@ -14,8 +14,9 @@
     <div id="container">
         <div id="game">
             <header>
-                <button id="more"></button>
-                
+                <div id="morediv">
+                    <button id="more"></button>
+                </div>
                 <h1 class="title">Gamerdle</h1>
                 <div id="button-right">
                     <button id="help"></button>
@@ -23,6 +24,49 @@
                     <button id="settings"></button>
                 </div>
             </header>
+
+            <div id="boardcontainer">
+                <div id="board"></div>
+            </div>
+
+            <div id="keyboardcontainer">
+                <div class="keyboardrow">
+                    <button data-key="q">q</button>
+                    <button data-key="w">w</button>
+                    <button data-key="e">e</button>
+                    <button data-key="r">r</button>
+                    <button data-key="t">t</button>
+                    <button data-key="y">y</button>
+                    <button data-key="u">u</button>
+                    <button data-key="i">i</button>
+                    <button data-key="o">o</button>
+                    <button data-key="p">p</button>
+                </div>
+
+                <div class="keyboardrow">
+                    <div class="spacer"></div>
+                    <button data-key="a">a</button>
+                    <button data-key="s">s</button>
+                    <button data-key="d">d</button>
+                    <button data-key="f">f</button>
+                    <button data-key="g">g</button>
+                    <button data-key="h">h</button>
+                    <button data-key="j">j</button>
+                    <button data-key="k">k</button>
+                    <button data-key="l">l</button>
+                </div>
+                <div class="keyboardrow">
+                    <button data-key="enter" class="wide">Enter</button>
+                    <button data-key="z">z</button>
+                    <button data-key="x">x</button>
+                    <button data-key="c">c</button>
+                    <button data-key="v">v</button>
+                    <button data-key="b">b</button>
+                    <button data-key="n">n</button>
+                    <button data-key="m">m</button>
+                    <button data-key="del" class="wide">Del</button>
+                </div>
+            </div>
         </div>
     </div>
     

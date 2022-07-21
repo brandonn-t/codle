@@ -29,15 +29,13 @@ header {
     
 }
 
-#button-right, #more{
+#button-right, #morediv{
     margin: 20px;
+    width: 200px;
     
 
 }
 
-#button-right{
-    
-}
 
 #more{
     background-image: url(../imgs/download.svg);
@@ -77,7 +75,30 @@ header {
     font-weight: bold;
     padding: 20px;
 }
-
 #game{
     width: 100%;
+}
+
+#boardcontainer{
+    display: flex;
+    justify-content: center;
+    flex-grow: 1;
+    overflow: hidden;
+    padding: 10px;
+}
+
+#board{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 5px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.square{
+    border: 2px solid whitesmoke;
+    min-width: 60px;
+    min-height: 60px;
+    font-size: 2rem;
+    font-weight: bold;
+
 }
