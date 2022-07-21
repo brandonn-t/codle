@@ -102,3 +102,38 @@ header {
     font-weight: bold;
 
 }
+
+#keyboardcontainer{
+    height: 200px;
+}
+
+.keyboardrow{
+    display: flex;
+    justify-content: center;
+    width: 500px;
+    margin: 0 auto 8px;
+    touch-action: manipulation;
+
+}
+
+.keyboardrow button{
+    font-family: inherit;
+    font-weight: bold;
+    border: 0;
+    padding: 0;
+    height: 60px;
+    cursor: pointer;
+    background-color: whitesmoke;
+    color: black;
+    flex-grow: 1;
+    text-transform: uppercase;
+    margin-right: 5px;
+    border-radius: 4px;
+    user-select: none;
+}
+.keyboardrow button.wide{
+    flex-grow: 1.5;
+}
+.spacer{
+    flex-grow: 0.5;
+}
