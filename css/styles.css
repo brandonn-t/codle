@@ -1,0 +1,83 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+html, body{
+    height: 100%;
+    max-width: 100%;
+    font-family: 'Courier New', Courier, monospace;
+
+}
+
+#container{
+    
+    display: flex;
+    background-color: black;
+    height: 100%;
+    align-items: center;
+    flex-direction: column;
+    
+    
+}
+header {
+    border-bottom: 2px solid darkgray;
+    width: inherit;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+
+#button-right, #more{
+    margin: 20px;
+    
+
+}
+
+#button-right{
+    
+}
+
+#more{
+    background-image: url(../imgs/download.svg);
+    background-size: cover;
+    width: 45px;
+    height: 45px;
+    border: none;
+}
+
+#help{
+    background-image: url(../imgs/question.svg);
+    background-size: cover;
+    width: 50px;
+    height: 50px;
+    border: none;
+   
+}
+
+#leaderboard{
+    background-image: url(../imgs/leaderboard.svg);
+    background-size: cover;
+    width: 50px;
+    height: 50px;
+    border: none;
+}
+#settings{
+    background-image: url(../imgs/settings.svg);
+    background-size: cover;
+    width: 50px;
+    height: 50px;
+    border: none;
+}
+.title{
+    color: whitesmoke;
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+    padding: 20px;
+}
+
+#game{
+    width: 100%;
+}
