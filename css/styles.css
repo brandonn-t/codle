@@ -98,8 +98,14 @@ header {
     border: 2px solid whitesmoke;
     min-width: 60px;
     min-height: 60px;
-    font-size: 2rem;
+    font-size: 50px;
     font-weight: bold;
+    color: gainsboro;
+    text-transform: capitalize;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
 }
 
