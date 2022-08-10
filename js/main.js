@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let availableSpace = 1;
     let word = "dairy";
     let guessedWordCount = 0;
+    let lowletter = false;
 
     function getCurrentWordArr(){
         const numOfGuessedWords = guessedWords.length
@@ -45,7 +46,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const currentWordArr = getCurrentWordArr()
         if(currentWordArr.length !== 5){
             window.alert("Word must be 5 letters");
-            
+            lowletter = true;
+            return;
             
         }
 
@@ -106,7 +108,18 @@ document.addEventListener("DOMContentLoaded", () => {
             const letter = target.getAttribute("data-key");
 
             if(letter == 'enter'){
-                handleSubmitWord()
+                
+                handleSubmitWord();
+
+                if(lowletter){
+                    const currentWordArr = getCurrentWordArr()
+                    console.log(currentWordArr.length)
+                    while(currentWordArr.length > 0){
+                        handleDeleteLetter();
+                    }
+                    lowletter = false;
+                }
+
                 return;
             }
 
