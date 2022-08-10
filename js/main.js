@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const keys = document.querySelectorAll(".keyboardrow button");
     let guessedWords = [[]]
     let availableSpace = 1;
-    let word = "dairy";
+    let word = "aaaaz";
     let guessedWordCount = 0;
     let lowletter = false;
 
@@ -25,9 +25,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     }
 
-    function getTileColor(letter, index){
+    function getTileColor(letter, index, checkedLetters){
         const isCorrectLetter = word.includes(letter);
-        if(!isCorrectLetter){
+        if(!isCorrectLetter || !checkedLetters.includes(letter)){
             return "rgb(58, 58, 60)";
         }
 
@@ -35,9 +35,11 @@ document.addEventListener("DOMContentLoaded", () => {
         const isCorrectPosition = letter === letterInThatPosition
 
         if(isCorrectPosition){
+            checkedLetters[index] = ''
             return "rgb(83, 141, 78)";
         }
-
+        const indexOfLetter = word.indexOf(letter);
+        checkedLetters[indexOfLetter] = '';
         return "rgb(181, 159, 59)";
     }
 
@@ -56,10 +58,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const firstLetterId = guessedWordCount * 5 + 1;
         const interval  = 250;
+        let checkedLetters = Array.from(word);
 
         currentWordArr.forEach((letter, index) => {
             setTimeout(() => {
-                const tileColor = getTileColor(letter, index)
+                
+                const tileColor = getTileColor(letter, index, checkedLetters)
 
                 const letterId = firstLetterId + index;
                 const letterEl = document.getElementById(letterId)
@@ -113,7 +117,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 if(lowletter){
                     const currentWordArr = getCurrentWordArr()
-                    console.log(currentWordArr.length)
                     while(currentWordArr.length > 0){
                         handleDeleteLetter();
                     }
