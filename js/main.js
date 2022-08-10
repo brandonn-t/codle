@@ -4,7 +4,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const keys = document.querySelectorAll(".keyboardrow button");
     let guessedWords = [[]]
     let availableSpace = 1;
-    let word = "aaaaz";
+    let str = "a1sms";
+    let word = Array.from(str);
     let guessedWordCount = 0;
     let lowletter = false;
 
@@ -31,14 +32,14 @@ document.addEventListener("DOMContentLoaded", () => {
             return "rgb(58, 58, 60)";
         }
 
-        const letterInThatPosition = word.charAt(index);
-        const isCorrectPosition = letter === letterInThatPosition
+        //const letterInThatPosition = word.charAt(index);
+        const isCorrectPosition = letter === word[index]
 
         if(isCorrectPosition){
             checkedLetters[index] = ''
             return "rgb(83, 141, 78)";
         }
-        const indexOfLetter = word.indexOf(letter);
+        const indexOfLetter = checkedLetters.indexOf(letter);
         checkedLetters[indexOfLetter] = '';
         return "rgb(181, 159, 59)";
     }
@@ -79,7 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         else if(guessedWords.length === 6){
-            window.alert(`You lost :( , the word is ${word}.`);
+            window.alert(`You lost :( , the word is ${str}.`);
         }
 
         guessedWords.push([])
