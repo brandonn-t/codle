@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
             
         }
 
-        const currentWord = currentWordArr.join("");
+        //const currentWord = currentWordArr.join("");
 
 
         const firstLetterId = guessedWordCount * 5 + 1;
@@ -75,7 +75,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
         guessedWordCount += 1;
 
-        if(currentWord === word){
+        
+        const result = currentWordArr.length === word.length && currentWordArr.every((e, index) => word.includes(e) && e === word[index]);
+        if(result){
             window.alert("Congratulations!");
         }
 
