@@ -1,13 +1,31 @@
 document.addEventListener("DOMContentLoaded", () => {
     createSquares();
+    getNewWord();
+
 
     const keys = document.querySelectorAll(".keyboardrow button");
     let guessedWords = [[]]
     let availableSpace = 1;
-    let str = "a1sms";
-    let word = Array.from(str);
+    let str;
+    console.log(str);
+    
     let guessedWordCount = 0;
     let lowletter = false;
+
+
+    function getNewWord() {
+        fetch(
+          `http://3.87.53.234:8080/posts`)
+          .then((response) => {
+            return response.json();
+          })
+          .then((res) => {
+            str = res.info.word;
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      }
 
     function getCurrentWordArr(){
         const numOfGuessedWords = guessedWords.length
@@ -27,12 +45,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function getTileColor(letter, index, checkedLetters){
+        let word = Array.from(str);
         const isCorrectLetter = word.includes(letter);
         if(!isCorrectLetter || !checkedLetters.includes(letter)){
             return "rgb(58, 58, 60)";
         }
 
-        //const letterInThatPosition = word.charAt(index);
         const isCorrectPosition = letter === word[index]
 
         if(isCorrectPosition){
@@ -46,6 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     function handleSubmitWord(){
+        let word = Array.from(str);
         const currentWordArr = getCurrentWordArr()
         if(currentWordArr.length !== 5){
             window.alert("Word must be 5 letters");
@@ -53,9 +72,6 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
             
         }
-
-        //const currentWord = currentWordArr.join("");
-
 
         const firstLetterId = guessedWordCount * 5 + 1;
         const interval  = 250;
