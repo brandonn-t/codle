@@ -7,10 +7,9 @@ document.addEventListener("DOMContentLoaded", () => {
     let guessedWords = [[]]
     let availableSpace = 1;
     let str;
-    console.log(str);
-    
     let guessedWordCount = 0;
     let lowletter = false;
+    let wincon = false;
 
 
     function getNewWord() {
@@ -73,35 +72,52 @@ document.addEventListener("DOMContentLoaded", () => {
             
         }
 
-        const firstLetterId = guessedWordCount * 5 + 1;
-        const interval  = 250;
-        let checkedLetters = Array.from(word);
+        let wordString = currentWordArr.join("");
 
-        currentWordArr.forEach((letter, index) => {
-            setTimeout(() => {
+        fetch(`http://3.87.53.234:8080/posts/${wordString}`)
+            .then((response) => {
+              return response.json();
+            })
+            .then((res) => {
+                if (res.length == 0){
+                    throw Error()
+              }
+
+                const firstLetterId = guessedWordCount * 5 + 1;
+                const interval  = 250;
+                let checkedLetters = Array.from(word);
+
+                currentWordArr.forEach((letter, index) => {
+                    setTimeout(() => {
+                        
+                        const tileColor = getTileColor(letter, index, checkedLetters)
+
+                        const letterId = firstLetterId + index;
+                        const letterEl = document.getElementById(letterId)
+                        letterEl.classList.add("animate__flipInX");
+                        letterEl.style = `background-color:${tileColor}; border-color:${tileColor}`
+                    }, interval * index);
+                });
+
+                guessedWordCount += 1;
+
                 
-                const tileColor = getTileColor(letter, index, checkedLetters)
+                const result = currentWordArr.length === word.length && currentWordArr.every((e, index) => word.includes(e) && e === word[index]);
+                if(result){
+                    window.alert("Congratulations!");
+                    wincon = true;
+                    
+                }
 
-                const letterId = firstLetterId + index;
-                const letterEl = document.getElementById(letterId)
-                letterEl.classList.add("animate__flipInX");
-                letterEl.style = `background-color:${tileColor}; border-color:${tileColor}`
-            }, interval * index);
-        });
+                else if(guessedWords.length === 6){
+                    window.alert(`You lost :( , the word is ${str}.`);
+                }
 
-        guessedWordCount += 1;
+                guessedWords.push([])
 
-        
-        const result = currentWordArr.length === word.length && currentWordArr.every((e, index) => word.includes(e) && e === word[index]);
-        if(result){
-            window.alert("Congratulations!");
-        }
-
-        else if(guessedWords.length === 6){
-            window.alert(`You lost :( , the word is ${str}.`);
-        }
-
-        guessedWords.push([])
+            }).catch(() => {
+                window.alert("word not recognized!")
+            })
     }
 
 
@@ -118,39 +134,52 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function handleDeleteLetter(){
         const currentWordArr = getCurrentWordArr()
+        if (currentWordArr.length == 0) {
+            return
+        }
+        else{
         const removedLetter = currentWordArr.pop()
 
         guessedWords[guessedWords.length - 1] = currentWordArr;
         const lastLetterEl = document.getElementById(String(availableSpace - 1))
         lastLetterEl.textContent = '';
         availableSpace = availableSpace - 1;
+
+        }
+        
     }
 
     for (let index = 0; index < keys.length; index++) {
         keys[index].onclick = ({ target }) => {
-            const letter = target.getAttribute("data-key");
-
-            if(letter == 'enter'){
+            
+            if(!wincon){
+                const letter = target.getAttribute("data-key");
                 
-                handleSubmitWord();
-
-                if(lowletter){
-                    const currentWordArr = getCurrentWordArr()
-                    while(currentWordArr.length > 0){
-                        handleDeleteLetter();
+                if(letter == 'enter'){
+                
+                    handleSubmitWord();
+    
+                    if(lowletter){
+                        const currentWordArr = getCurrentWordArr()
+                        while(currentWordArr.length > 0){
+                            handleDeleteLetter();
+                        }
+                        lowletter = false;
                     }
-                    lowletter = false;
+    
+                    return;
                 }
-
-                return;
+    
+                if(letter == 'del'){
+                    handleDeleteLetter();
+                    return;
+                }
+    
+                updateGuessedWords(letter)
             }
+            
 
-            if(letter == 'del'){
-                handleDeleteLetter();
-                return;
-            }
-
-            updateGuessedWords(letter)
+            
         };        
     }
 
