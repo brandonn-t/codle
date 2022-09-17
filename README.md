@@ -1,2 +1,2 @@
 # codle
-Wordle but with words from the gaming community/cod.
+Wordle but with words from cod.
